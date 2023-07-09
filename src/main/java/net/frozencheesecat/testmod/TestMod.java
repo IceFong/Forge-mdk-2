@@ -1,7 +1,6 @@
-//hello
+
 package net.frozencheesecat.testmod;
 
-//new comment
 // import com.mojang.logging.LogUtils;
 // import net.minecraft.client.Minecraft;
 // import net.minecraft.world.item.BlockItem;
