@@ -1,7 +1,8 @@
 //hello
 package net.frozencheesecat.testmod;
 
-import com.mojang.logging.LogUtils;
+//new comment
+// import com.mojang.logging.LogUtils;
 // import net.minecraft.client.Minecraft;
 // import net.minecraft.world.item.BlockItem;
 // import net.minecraft.world.item.CreativeModeTabs;
