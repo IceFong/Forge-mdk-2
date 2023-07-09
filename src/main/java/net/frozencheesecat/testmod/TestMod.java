@@ -1,3 +1,4 @@
+//hello
 package net.frozencheesecat.testmod;
 
 import com.mojang.logging.LogUtils;
