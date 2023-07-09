@@ -1,6 +1,10 @@
 
 package net.frozencheesecat.testmod;
 
+import net.frozencheesecat.testmod.item.ModCreativeTab;
+import net.frozencheesecat.testmod.item.ModItem;
+// import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 // import com.mojang.logging.LogUtils;
 // import net.minecraft.client.Minecraft;
 // import net.minecraft.world.item.BlockItem;
@@ -12,7 +16,7 @@ package net.frozencheesecat.testmod;
 // import net.minecraft.world.level.material.Material;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
-// import net.minecraftforge.event.CreativeModeTabEvent;
+import net.minecraftforge.event.CreativeModeTabEvent;
 // import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -39,6 +43,9 @@ public class TestMod
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModItem.register(modEventBus);
+        
+
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
@@ -47,11 +54,26 @@ public class TestMod
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
+        modEventBus.addListener(this::addCreative);
+
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         // Some common setup code
+    }
+
+    private void addCreative(CreativeModeTabEvent.BuildContents event)
+    {
+        if (event.getTab() == ModCreativeTab.TEST_TAB) {
+            event.accept(ModItem.ZIRCON);
+            event.accept(ModItem.RAW_ZIRCON);
+        }
+
+        if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItem.ZIRCON);
+        }
+            
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
