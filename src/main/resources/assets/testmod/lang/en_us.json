@@ -2,5 +2,7 @@
     "item.testmod.zircon": "Zircon",
     "item.testmod.raw_zircon": "Raw Zircon",
 
+    "block.testmod.black_opal_block": "Block of Black Opal",
+
     "creativemodetab.test_tab": "Test Tab"
 }

@@ -1,6 +1,7 @@
 
 package net.frozencheesecat.testmod;
 
+import net.frozencheesecat.testmod.block.ModBlock;
 import net.frozencheesecat.testmod.item.ModCreativeTab;
 import net.frozencheesecat.testmod.item.ModItem;
 // import net.minecraft.world.item.CreativeModeTab;
@@ -44,6 +45,7 @@ public class TestMod
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItem.register(modEventBus);
+        ModBlock.register(modEventBus);
         
 
         // Register the commonSetup method for modloading
@@ -68,6 +70,8 @@ public class TestMod
         if (event.getTab() == ModCreativeTab.TEST_TAB) {
             event.accept(ModItem.ZIRCON);
             event.accept(ModItem.RAW_ZIRCON);
+
+            event.accept(ModBlock.BLACK_OPAL_BLOCK);
         }
 
         if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
