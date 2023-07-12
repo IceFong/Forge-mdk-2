@@ -68,10 +68,16 @@ public class TestMod
     private void addCreative(CreativeModeTabEvent.BuildContents event)
     {
         if (event.getTab() == ModCreativeTab.TEST_TAB) {
+
             event.accept(ModItem.ZIRCON);
             event.accept(ModItem.RAW_ZIRCON);
 
             event.accept(ModBlock.BLACK_OPAL_BLOCK);
+            event.accept(ModBlock.BLACK_OPAL_ORE);
+            event.accept(ModBlock.DEEPSLATE_BLACK_OPAL_ORE);
+            event.accept(ModBlock.NETHERRACK_BLACK_OPAL_ORE);
+            event.accept(ModBlock.ENDSTONE_BLACK_OPAL_ORE);
+
         }
 
         if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
