@@ -71,6 +71,8 @@ public class TestMod
 
             event.accept(ModItem.ZIRCON);
             event.accept(ModItem.RAW_ZIRCON);
+            event.accept(ModItem.RAW_BLACK_OPAL);
+            event.accept(ModItem.BLACK_OPAL);
 
             event.accept(ModBlock.BLACK_OPAL_BLOCK);
             event.accept(ModBlock.BLACK_OPAL_ORE);

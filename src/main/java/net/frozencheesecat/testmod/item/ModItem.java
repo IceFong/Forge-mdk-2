@@ -21,6 +21,14 @@ public class ModItem {
     public static final RegistryObject<Item> RAW_ZIRCON = ITEMS.register("raw_zircon", 
         () -> new Item( new Item.Properties()));
 
+    public static final RegistryObject<Item> RAW_BLACK_OPAL = ITEMS.register( "raw_black_opal",
+        () -> new Item( new Item.Properties())
+    );
+    
+    public static final RegistryObject<Item> BLACK_OPAL = ITEMS.register( "black_opal",
+        () -> new Item( new Item.Properties())
+    );
+
 
 
     public static void register(IEventBus eventBus) {

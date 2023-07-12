@@ -1,6 +1,8 @@
 {
     "item.testmod.zircon": "Zircon",
     "item.testmod.raw_zircon": "Raw Zircon",
+    "item.testmod.raw_black_opal": "Raw Black Opal",
+    "item.testmod.black_opal": "Black Opal",
 
     "block.testmod.black_opal_block": "Block of Black Opal",
     "block.testmod.black_opal_ore": "Black Opal Ore",

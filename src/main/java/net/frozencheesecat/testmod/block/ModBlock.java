@@ -30,7 +30,13 @@ public class ModBlock {
         () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
             .strength(6f)
             .requiresCorrectToolForDrops()));
+            
+    //Black Opal Ore
+    // public static final RegistryObject<Block> BLACK_OPAL_ORE = registerBlock("black_opal_ore",
+    //     () -> new Block(BlockBehaviour.Properties.of(Material.STONE)
+    //         .strength(5f).requiresCorrectToolForDrops()));
     
+            
     //Black Opal Ore
     public static final RegistryObject<Block> BLACK_OPAL_ORE = registerBlock("black_opal_ore",
         () -> new DropExperienceBlock(BlockBehaviour.Properties.of(Material.STONE)
