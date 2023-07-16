@@ -69,8 +69,8 @@ public class TestMod
     {
         if (event.getTab() == ModCreativeTab.TEST_TAB) {
 
-            event.accept(ModItem.ZIRCON);
-            event.accept(ModItem.RAW_ZIRCON);
+            // event.accept(ModItem.ZIRCON);
+            // event.accept(ModItem.RAW_ZIRCON);
             event.accept(ModItem.RAW_BLACK_OPAL);
             event.accept(ModItem.BLACK_OPAL);
 
@@ -82,8 +82,16 @@ public class TestMod
 
         }
 
-        if (event.getTab() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(ModItem.ZIRCON);
+        if (event.getTab() == ModCreativeTab.TEST_TAB_2) {
+
+            event.accept(ModBlock.EBONY_LOG);
+            event.accept(ModBlock.EBONY_WOOD);
+            event.accept(ModBlock.STRIPPED_EBONY_LOG);
+            event.accept(ModBlock.STRIPPED_EBONY_WOOD);
+            event.accept(ModBlock.EBONY_PLANKS);
+            event.accept(ModBlock.EBONY_LEAVES);
+            event.accept(ModBlock.EBONY_SAPLING);
+        
         }
             
     }

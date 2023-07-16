@@ -15,11 +15,11 @@ public class ModItem {
     public static final DeferredRegister<Item> ITEMS = 
         DeferredRegister.create(ForgeRegistries.ITEMS, TestMod.MODID);
 
-    public static final RegistryObject<Item> ZIRCON = ITEMS.register("zircon", 
-        () -> new Item( new Item.Properties()));
+    // public static final RegistryObject<Item> ZIRCON = ITEMS.register("zircon", 
+    //     () -> new Item( new Item.Properties()));
     
-    public static final RegistryObject<Item> RAW_ZIRCON = ITEMS.register("raw_zircon", 
-        () -> new Item( new Item.Properties()));
+    // public static final RegistryObject<Item> RAW_ZIRCON = ITEMS.register("raw_zircon", 
+    //     () -> new Item( new Item.Properties()));
 
     public static final RegistryObject<Item> RAW_BLACK_OPAL = ITEMS.register( "raw_black_opal",
         () -> new Item( new Item.Properties())
