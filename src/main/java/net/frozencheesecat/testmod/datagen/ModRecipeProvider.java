@@ -40,7 +40,7 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
             RecipeCategory.BUILDING_BLOCKS, ModBlock.BLACK_OPAL_BLOCK.get(), "_to_", null, "_to_", null
         );
 
-        planksFromLog(consumer, ModBlock.EBONY_PLANKS.get(), (ItemLike) List.of(ModBlock.EBONY_LOG.get(), ModBlock.STRIPPED_EBONY_LOG.get()), 4);
+        planksFromLog(consumer, ModBlock.EBONY_PLANKS.get(), ModBlock.EBONY_LOG.get(), 4);
         
     }
 
