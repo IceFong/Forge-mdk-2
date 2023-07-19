@@ -5,7 +5,9 @@
       "conditions": {
         "items": [
           {
-            "tag": "minecraft:logs"
+            "items": [
+              "testmod:ebony_log"
+            ]
           }
         ]
       },
@@ -13,7 +15,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "testmod:ebony_planks"
+        "recipe": "testmod:ebony_wood_from_ebony_log"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +28,7 @@
   ],
   "rewards": {
     "recipes": [
-      "testmod:ebony_planks"
+      "testmod:ebony_wood_from_ebony_log"
     ]
   }
 }

@@ -4,7 +4,7 @@
   "group": "planks",
   "ingredients": [
     {
-      "item": "testmod:ebony_log"
+      "tag": "minecraft:logs"
     }
   ],
   "result": {

@@ -7,6 +7,8 @@ import java.util.function.Consumer;
 
 import javax.annotation.Nullable;
 
+import com.mojang.datafixers.types.templates.Tag;
+
 import net.frozencheesecat.testmod.TestMod;
 import net.frozencheesecat.testmod.block.ModBlock;
 import net.frozencheesecat.testmod.item.ModItem;
@@ -17,7 +19,11 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -30,6 +36,10 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
         super(output);
     }
 
+    //Custom Item Tags
+    public static final TagKey<Item> AllLogs = ItemTags.create( new ResourceLocation(TestMod.MODID) );
+    ////
+
     @Override
     protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
         oreSmelting(consumer, List.of(ModItem.RAW_BLACK_OPAL.get()), RecipeCategory.MISC,
@@ -40,17 +50,38 @@ public class ModRecipeProvider extends RecipeProvider implements IConditionBuild
             RecipeCategory.BUILDING_BLOCKS, ModBlock.BLACK_OPAL_BLOCK.get(), "_to_", null, "_to_", null
         );
 
-        planksFromLog(consumer, ModBlock.EBONY_PLANKS.get(), ModBlock.EBONY_LOG.get(), 4);
+        // planksFromLog(consumer, ModBlock.EBONY_PLANKS.get(), ModBlock.EBONY_LOG.get(), 4, "_from_");
+        // planksFromLog(consumer, ModBlock.EBONY_PLANKS.get(), ModBlock.STRIPPED_EBONY_LOG.get(), 4, "_from_");
+        // planksFromLog(consumer, ModBlock.EBONY_PLANKS.get(), ModBlock.EBONY_WOOD.get(), 4, "_from_");
+        // planksFromLog(consumer, ModBlock.EBONY_PLANKS.get(), ModBlock.STRIPPED_EBONY_WOOD.get(), 4, "_from_");
+
+
+        planksFromLog(consumer, ModBlock.EBONY_PLANKS.get(), AllLogs, 4);
         
+        woodFromLogs(consumer, ModBlock.EBONY_WOOD.get(), ModBlock.EBONY_LOG.get(), "_from_");
+
     }
 
     ////////////////////
     //Method Redefined//
     ////////////////////
-    protected static void planksFromLog(Consumer<FinishedRecipe> consumer, ItemLike planks, ItemLike log, int p_259471_) {
+    protected static void woodFromLogs(Consumer<FinishedRecipe> p_126003_, ItemLike wood, ItemLike log, String text) {
+      ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, wood, 3)
+        .define('#', log)
+          .pattern("##")
+          .pattern("##")
+          .group("bark").unlockedBy("has_log", has(log))
+        .save(p_126003_, new ResourceLocation(TestMod.MODID, getItemName(wood) + text + getItemName(log)));
+    }
+
+    protected static void planksFromLog(Consumer<FinishedRecipe> consumer, ItemLike planks, TagKey<Item> log, int p_259471_) {
       ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, planks, p_259471_).requires(log).group("planks").unlockedBy("has_log", has(log))
         .save(consumer, new ResourceLocation(TestMod.MODID, getItemName(planks)));
-   }
+    }
+    // protected static void planksFromLog(Consumer<FinishedRecipe> consumer, ItemLike planks, ItemLike log, int p_259471_, String text) {
+    //   ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS, planks, p_259471_).requires(log).group("planks").unlockedBy("has_log", has(log))
+    //     .save(consumer, new ResourceLocation(TestMod.MODID, getItemName(planks) + text + getItemName(log)));
+    // }
 
     protected static void oreSmelting(Consumer<FinishedRecipe> p_250654_, List<ItemLike> p_250172_, RecipeCategory p_250588_, ItemLike p_251868_, float p_250789_, int p_252144_, String p_251687_) {
       oreCooking(p_250654_, RecipeSerializer.SMELTING_RECIPE, p_250172_, p_250588_, p_251868_, p_250789_, p_252144_, p_251687_, "_from_smelting");
