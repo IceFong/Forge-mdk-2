@@ -8,6 +8,7 @@ import net.frozencheesecat.testmod.item.ModItem;
 import net.frozencheesecat.testmod.worldgen.tree.EbonyTreeGrower;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 // import net.minecraft.world.item.CreativeModeTabs;
@@ -20,11 +21,14 @@ import net.minecraft.world.level.block.SaplingBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 // import net.minecraftforge.event.CreativeModeTabEvent.Register;
 // import net.minecraftforge.common.CreativeModeTabRegistry;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlock {
@@ -132,10 +136,22 @@ public class ModBlock {
             new Item.Properties()));
     }
 
-
+    
 
     public static void register(IEventBus eventBus) {
         BLOCKS.register(eventBus);
+    }
+
+
+    @SubscribeEvent
+    public void register(RegisterEvent event) {
+    event.register(ForgeRegistries.Keys.BLOCKS,
+        helper -> {
+            helper.register(new ResourceLocation(TestMod.MODID, "example_block_1"), new Block(BlockBehaviour.Properties.of(Material.LAVA, MaterialColor.METAL)));
+            // helper.register(new ResourceLocation(TestMod.MODID, "example_block_2"), new Block(null));
+            // helper.register(new ResourceLocation(TestMod.MODID, "example_block_3"), new Block(null));
+            }
+        );
     }
 
 }

@@ -12,18 +12,15 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
-        DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, TestMod.MODID);
+            DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, TestMod.MODID);
 
     public static final RegistryObject<EntityType<TigerEntity>> TIGER =
-        ENTITY_TYPES.register("tiger",
-            () -> EntityType.Builder.of(TigerEntity::new, MobCategory.CREATURE)
-                                        .sized(1.5f, 1.75f)
-                                        .build(new ResourceLocation(TestMod.MODID, "tiger").toString())
-            ); 
-
-
+            ENTITY_TYPES.register("tiger",
+                    () -> EntityType.Builder.of(TigerEntity::new, MobCategory.CREATURE)
+                            .sized(1.5f, 1.75f)
+                            .build(new ResourceLocation(TestMod.MODID, "tiger").toString()));
 
     public static void register(IEventBus eventBus) {
-            ENTITY_TYPES.register(eventBus);
+        ENTITY_TYPES.register(eventBus);
     }
 }

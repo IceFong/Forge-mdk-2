@@ -31,7 +31,7 @@ public class ModItem {
         () -> new Item( new Item.Properties())
     );
     
-    public static final RegistryObject<Item> TIGER_SPAWN_EGG = ITEMS.register( "tiger_spwan_egg",
+    public static final RegistryObject<Item> TIGER_SPAWN_EGG = ITEMS.register( "tiger_spawn_egg",
         () -> new ForgeSpawnEggItem(ModEntities.TIGER, 0xD57E36, 0x1D0D00, 
             new Item.Properties())
     );

@@ -1,7 +1,5 @@
 package net.frozencheesecat.testmod.entity.client;
 
-import javax.swing.text.html.parser.Entity;
-
 import net.frozencheesecat.testmod.TestMod;
 import net.frozencheesecat.testmod.entity.custom.TigerEntity;
 import net.minecraft.resources.ResourceLocation;
@@ -13,15 +11,16 @@ import software.bernie.geckolib.model.GeoModel;
 import software.bernie.geckolib.model.data.EntityModelData;
 
 public class TigerModel extends GeoModel<TigerEntity> {
-    
     @Override
     public ResourceLocation getModelResource(TigerEntity animatable) {
         return new ResourceLocation(TestMod.MODID, "geo/tiger.geo.json");
     }
+
     @Override
     public ResourceLocation getTextureResource(TigerEntity animatable) {
         return new ResourceLocation(TestMod.MODID, "textures/entity/tiger.png");
     }
+
     @Override
     public ResourceLocation getAnimationResource(TigerEntity animatable) {
         return new ResourceLocation(TestMod.MODID, "animations/tiger.animation.json");
@@ -37,7 +36,5 @@ public class TigerModel extends GeoModel<TigerEntity> {
             head.setRotX(entityData.headPitch() * Mth.DEG_TO_RAD);
             head.setRotY(entityData.netHeadYaw() * Mth.DEG_TO_RAD);
         }
-
     }
-
 }

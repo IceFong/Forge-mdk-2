@@ -1,7 +1,5 @@
 package net.frozencheesecat.testmod.entity.custom;
 
-import javax.annotation.Nullable;
-
 import net.frozencheesecat.testmod.entity.ModEntities;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.AgeableMob;
@@ -19,26 +17,23 @@ import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager.ControllerRegistrar;
+import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.core.animation.Animation;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
 
 public class TigerEntity extends Animal implements GeoEntity {
-
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     public TigerEntity(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
     }
 
-     public static AttributeSupplier setAttributes() {
+    public static AttributeSupplier setAttributes() {
         return Animal.createMobAttributes()
                 .add(Attributes.MAX_HEALTH, 16D)
                 .add(Attributes.ATTACK_DAMAGE, 3.0f)
@@ -59,29 +54,19 @@ public class TigerEntity extends Animal implements GeoEntity {
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Creeper.class, true));
     }
 
-
-    @Override
     @Nullable
+    @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob ageableMob) {
-        // // TODO Auto-generated method stub
-        // throw new UnsupportedOperationException("Unimplemented method 'getBreedOffspring'");
         return ModEntities.TIGER.get().create(level);
     }
 
     @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
-
-    @Override
-    public void registerControllers(ControllerRegistrar controllerRegistrar) {
-        // TODO Auto-generated method stub
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllerRegistrar) {
         controllerRegistrar.add(new AnimationController<>(this, "controller", 0, this::predicate));
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> tAnimationState) {
-
-        if (tAnimationState.isMoving()) {
+        if(tAnimationState.isMoving()) {
             tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.tiger.walk", Animation.LoopType.LOOP));
             return PlayState.CONTINUE;
         }
@@ -89,5 +74,9 @@ public class TigerEntity extends Animal implements GeoEntity {
         tAnimationState.getController().setAnimation(RawAnimation.begin().then("animation.tiger.idle", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
-    
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
+    }
 }
