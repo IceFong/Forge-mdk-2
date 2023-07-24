@@ -1,0 +1,11 @@
+{
+
+    "replace": false,
+    "values": [
+        "testmod:ebony_log",
+        "testmod:ebony_wood",
+        "testmod:stripped_ebony_log",
+        "testmod:stripped_ebony_wood"
+    ]
+
+}
