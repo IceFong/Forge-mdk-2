@@ -19,7 +19,7 @@ public class ModEntities {
             () -> EntityType.Builder.of(TigerEntity::new, MobCategory.CREATURE)
                                         .sized(1.5f, 1.75f)
                                         .build(new ResourceLocation(TestMod.MODID, "tiger").toString())
-            );
+            ); 
 
 
 
