@@ -10,7 +10,7 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class TigerRenderer extends GeoEntityRenderer<TigerEntity> {
     public TigerRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new TigerModel());
+        super(renderManager, new TigerModel(new ResourceLocation(TestMod.MODID, "tiger")));
     }
 
     @Override
