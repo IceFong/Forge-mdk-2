@@ -19,5 +19,7 @@
     "block.testmod.ebony_leaves": "Ebony Leaves",
     "block.testmod.ebony_sapling": "Ebony Sapling",
 
+    "entity.testmod.tiger": "Tiger",
+
     "creativemodetab.test_tab": "Test Tab"
 }
