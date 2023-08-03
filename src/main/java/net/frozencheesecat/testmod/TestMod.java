@@ -4,6 +4,7 @@ package net.frozencheesecat.testmod;
 import net.frozencheesecat.testmod.block.ModBlock;
 import net.frozencheesecat.testmod.entity.ModEntities;
 import net.frozencheesecat.testmod.entity.client.TigerRenderer;
+import net.frozencheesecat.testmod.event.GeneralEvents;
 import net.frozencheesecat.testmod.item.ModCreativeTab;
 import net.frozencheesecat.testmod.item.ModItem;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -40,6 +41,7 @@ public class TestMod
         modEventBus.addListener(this::commonSetup);
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(GeneralEvents.class);
 
         modEventBus.addListener(this::addCreative);
 
