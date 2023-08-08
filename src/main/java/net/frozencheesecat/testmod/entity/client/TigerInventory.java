@@ -9,8 +9,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.entity.IEntityAdditionalSpawnData;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -21,7 +23,6 @@ public class TigerInventory extends Entity {
     /////
     /////
     /////
-
     protected final int size;
     protected int timer;
     protected boolean requiresUpdate;
@@ -72,6 +73,7 @@ public class TigerInventory extends Entity {
         super.invalidateCaps();
         inventoryHandlerLazyOptional.invalidate();
     }
+
 
     @Override
     protected void defineSynchedData() {
