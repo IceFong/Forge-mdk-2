@@ -4,9 +4,11 @@ package net.frozencheesecat.testmod;
 import net.frozencheesecat.testmod.block.ModBlock;
 import net.frozencheesecat.testmod.entity.ModEntities;
 import net.frozencheesecat.testmod.entity.client.TigerRenderer;
+import net.frozencheesecat.testmod.event.ClientEvent;
 import net.frozencheesecat.testmod.event.GeneralEvents;
 import net.frozencheesecat.testmod.item.ModCreativeTab;
 import net.frozencheesecat.testmod.item.ModItem;
+import net.frozencheesecat.testmod.simpleImpl.TestModPacketHandler;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -42,6 +44,7 @@ public class TestMod
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(GeneralEvents.class);
+        MinecraftForge.EVENT_BUS.register(ClientEvent.class);
 
         modEventBus.addListener(this::addCreative);
 
@@ -50,6 +53,7 @@ public class TestMod
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         // Some common setup code
+        TestModPacketHandler.register();
     }
 
     private void addCreative(CreativeModeTabEvent.BuildContents event)

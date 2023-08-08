@@ -1,27 +1,36 @@
 package net.frozencheesecat.testmod.event;
 
+import java.lang.reflect.Type;
+
 import net.frozencheesecat.testmod.entity.ModEntities;
-import net.frozencheesecat.testmod.entity.custom.TigerEntity;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class GeneralEvents {
 
+    private static final Type Entity = null;
+
     @SubscribeEvent
     public static void playerClickOnEntity(PlayerInteractEvent.EntityInteract event) {
-        
-        EntityType<TigerEntity> Tiger = ModEntities.TIGER.get();
-        if (event.getTarget().getType() == Tiger) {
-            event.getTarget().kill();
+
+        Entity entity = event.getTarget();
+        if (entity.getType() == ModEntities.TIGER.get()) {
+            entity.setNoGravity(true);
         }
-        else {
-            System.out.println("not a tiger");
-        }
-        // ModEntities.TIGER.get();
+
     }
 
+    @SubscribeEvent
+    public static void entityInventory(AttachCapabilitiesEvent<Entity> event) {
+        if (event.getGenericType() == Entity)
+        event.addCapability(new ResourceLocation("tiger"),
+            null);
+    }
 
+    
 
 }
  
