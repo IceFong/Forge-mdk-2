@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.items.IItemHandler;
 
 public class TigerInventory implements IItemHandler {
@@ -65,15 +67,60 @@ public class TigerInventory implements IItemHandler {
         if (!(slot >= 0 && slot < inventory.size())) 
             return ItemStack.EMPTY;
         
-        if (inventory.get(slot) == ItemStack.EMPTY) {
-            
-        }
+        return inventory.get(slot);
     }
 
     @Override
     public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insertItem'");
+        if (!simulate) {
+            ItemStack insertSlot = inventory.get(slot);
+            boolean isEmpty = false;
+            //Item slot is empty
+            if (insertSlot.isEmpty()) {
+                isEmpty = true;
+            }
+            //Item slot is not the same item
+            if (!insertSlot.sameItem(stack)) {
+                
+                //check can insert all to the same slot
+                int notTaken = stack.getCount() - insertSlot.getMaxStackSize();
+
+                if (insertSlot.getMaxStackSize() < stack.getCount()) {
+                    insertSlot = new ItemStack(stack.getItem(), insertSlot.getMaxStackSize(), stack.getTag());
+                }
+                else {
+                    insertSlot = stack;
+                }
+
+                //handle return
+                if (isEmpty) {
+                    return ItemStack.EMPTY;
+                }
+                else {
+                    return new ItemStack(stack.getItem(), notTaken, stack.getTag());
+                }
+                
+
+            }
+                //Item slot has the same
+            else {
+
+                int fullStack = insertSlot.getCount() + stack.getCount();
+
+                if (fullStack > insertSlot.getMaxStackSize()) {
+                    insertSlot = new ItemStack(stack.getItem(), fullStack, null)
+                }
+
+            }
+
+
+            
+
+
+        }
+        else {
+
+        }
     }
 
     @Override
