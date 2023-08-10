@@ -4,6 +4,7 @@ package net.frozencheesecat.testmod;
 import net.frozencheesecat.testmod.block.ModBlock;
 import net.frozencheesecat.testmod.entity.ModEntities;
 import net.frozencheesecat.testmod.entity.client.TigerRenderer;
+import net.frozencheesecat.testmod.event.CapabilityEvent;
 import net.frozencheesecat.testmod.event.ClientEvent;
 import net.frozencheesecat.testmod.event.GeneralEvents;
 import net.frozencheesecat.testmod.item.ModCreativeTab;
@@ -45,6 +46,7 @@ public class TestMod
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(GeneralEvents.class);
         MinecraftForge.EVENT_BUS.register(ClientEvent.class);
+        MinecraftForge.EVENT_BUS.register(CapabilityEvent.class);
 
         modEventBus.addListener(this::addCreative);
 
