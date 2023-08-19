@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import net.frozencheesecat.testmod.TestMod;
 import net.frozencheesecat.testmod.simpleImpl.packet.ExampleC2SPacket;
+import net.frozencheesecat.testmod.simpleImpl.packet.ItemStackC2SPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -42,6 +43,15 @@ public class TestModPacketHandler {
             ExampleC2SPacket::handle,
             Optional.of(NetworkDirection.PLAY_TO_SERVER)
         );
+        
+        INSTANCE.registerMessage(
+            id(),
+            ItemStackC2SPacket.class,
+            ItemStackC2SPacket::toBytes,
+            ItemStackC2SPacket::new,
+            ItemStackC2SPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
     }
 
     public static <MSG> void sendToServer(MSG message) {
@@ -50,6 +60,10 @@ public class TestModPacketHandler {
     
     public static <MSG> void sendToPlayer(MSG message, ServerPlayer player) {
         INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
+    }
+
+    public static <MSG> void sendToPlayers(MSG message) {
+        INSTANCE.send(PacketDistributor.ALL.noArg(), message);
     }
      
 }

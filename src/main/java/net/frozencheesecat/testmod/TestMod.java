@@ -2,14 +2,17 @@
 package net.frozencheesecat.testmod;
 
 import net.frozencheesecat.testmod.block.ModBlock;
+import net.frozencheesecat.testmod.blockentity.RegisteryOfBlockEntities;
 import net.frozencheesecat.testmod.entity.ModEntities;
 import net.frozencheesecat.testmod.entity.client.TigerRenderer;
-import net.frozencheesecat.testmod.event.CapabilityEvent;
 import net.frozencheesecat.testmod.event.ClientEvent;
 import net.frozencheesecat.testmod.event.GeneralEvents;
 import net.frozencheesecat.testmod.item.ModCreativeTab;
 import net.frozencheesecat.testmod.item.ModItem;
+import net.frozencheesecat.testmod.screen.ModMenus;
+import net.frozencheesecat.testmod.screen.TigerInventoryScreen;
 import net.frozencheesecat.testmod.simpleImpl.TestModPacketHandler;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -37,16 +40,17 @@ public class TestMod
 
         ModItem.register(modEventBus);
         ModBlock.register(modEventBus);
-        
         ModEntities.register(modEventBus);
+        ModMenus.register(modEventBus);
+        RegisteryOfBlockEntities.register(modEventBus);
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
+
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(GeneralEvents.class);
         MinecraftForge.EVENT_BUS.register(ClientEvent.class);
-        MinecraftForge.EVENT_BUS.register(CapabilityEvent.class);
 
         modEventBus.addListener(this::addCreative);
 
@@ -98,6 +102,8 @@ public class TestMod
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             EntityRenderers.register(ModEntities.TIGER.get(), TigerRenderer::new);
+
+            MenuScreens.register(ModMenus.TIGER_INVENTORY_MENU.get(), TigerInventoryScreen::new);
         }
     }
 }
