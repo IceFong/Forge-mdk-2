@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Supplier;
 
-import net.frozencheesecat.testmod.blockentity.FirstBlockEntity;
+import net.frozencheesecat.testmod.blockentity.firstBlock.FirstBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;

@@ -1,10 +1,11 @@
-package net.frozencheesecat.testmod.blockentity;
+package net.frozencheesecat.testmod.blockentity.firstBlock;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Nullable;
 
+import net.frozencheesecat.testmod.blockentity.RegisteryOfBlockEntities;
 import net.frozencheesecat.testmod.simpleImpl.TestModPacketHandler;
 import net.frozencheesecat.testmod.simpleImpl.packet.ItemStackC2SPacket;
 import net.minecraft.core.BlockPos;
@@ -14,18 +15,23 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 public class FirstBlockEntity extends BlockEntity implements MenuProvider {
 
     private int progress = 0;
-    private final int maxProgress = 80;
+    private int maxProgress = 80;
+    protected final ContainerData data;
+
+
 
     private CRAFT_STATE crafState = CRAFT_STATE.IDLE;
 
@@ -40,7 +46,31 @@ public class FirstBlockEntity extends BlockEntity implements MenuProvider {
     };
 
     public FirstBlockEntity(BlockPos pos, BlockState state) {
-        super(RegisteryOfBlockEntities.FIRST_BLOCK_ENTITY.get(), pos, state);
+        super(RegisteryOfBlockEntities.FIRST_BLOCK.get(), pos, state);
+        this.data = new ContainerData() {
+            @Override
+            public int get(int index) {
+                return switch (index) {
+                    case 0 -> FirstBlockEntity.this.progress;
+                    case 1 -> FirstBlockEntity.this.maxProgress;
+                    default -> 0;
+                };
+            }
+
+            @Override
+            public void set(int index, int value) {
+                switch (index) {
+                    case 0 -> FirstBlockEntity.this.progress = value;
+                    case 1 -> FirstBlockEntity.this.maxProgress = value;
+                }
+            }
+
+            @Override
+            public int getCount() {
+                return 2;
+            }
+        };
+
     }
 
 
@@ -237,19 +267,23 @@ public class FirstBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     //Menu
+    
+
     @Override
     @Nullable
-    public AbstractContainerMenu createMenu(int p_39954_, Inventory p_39955_, Player p_39956_) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createMenu'");
+    public AbstractContainerMenu createMenu(int id, Inventory inv, Player player) {
+        
+        return new FirstBlockMenu(id, inv, this.data, this);
+
     }
 
 
     @Override
     public Component getDisplayName() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDisplayName'");
+        return Component.literal("First Block");
     }
+
+    
     /////
 
     //Renderer
@@ -263,5 +297,13 @@ public class FirstBlockEntity extends BlockEntity implements MenuProvider {
         }
     }
     /////
+
+    public IItemHandler getItemHandler() {
+        return this.itemHandler;
+    }
+
+    public ContainerData getContainerData() {
+        return this.data;
+    }
 
 }

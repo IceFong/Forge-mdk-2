@@ -3,6 +3,7 @@ package net.frozencheesecat.testmod.block;
 import java.util.function.Supplier;
 
 import net.frozencheesecat.testmod.TestMod;
+import net.frozencheesecat.testmod.block.custom.FirstBlock;
 import net.frozencheesecat.testmod.block.custom.ModFlammableRotatedPillarBlock;
 import net.frozencheesecat.testmod.item.ModItem;
 import net.frozencheesecat.testmod.worldgen.tree.EbonyTreeGrower;
@@ -124,7 +125,14 @@ public class ModBlock {
         () -> new SaplingBlock(new EbonyTreeGrower(), BlockBehaviour.Properties.copy(Blocks.OAK_SAPLING)));
 
 
+    
+    //First Block
+    public static final RegistryObject<Block> FIRST_BLOCK = registerBlock("first_block", 
+        () -> new FirstBlock(BlockBehaviour.Properties.copy(Blocks.STONE)));
 
+
+
+    //Useful Methods
     private static <T extends Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
         RegistryObject<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);

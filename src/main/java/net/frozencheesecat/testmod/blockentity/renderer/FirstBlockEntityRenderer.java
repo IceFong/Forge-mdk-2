@@ -6,7 +6,7 @@ import org.joml.Vector3f;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
-import net.frozencheesecat.testmod.blockentity.FirstBlockEntity;
+import net.frozencheesecat.testmod.blockentity.firstBlock.FirstBlockEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
